@@ -31,10 +31,10 @@ type Verb = {
 }
 
 class VerbObject {
-    private readonly verbConfigs: Verb;
+    private readonly verb: Verb;
 
     public constructor(verb: Verb) {
-        this.verbConfigs = {
+        this.verb = {
             ergativeMarker: Person.None,
             obliqueMarker: Person.None,
             negative: false,
@@ -43,14 +43,29 @@ class VerbObject {
     }
 
     public getVerb(): Verb {
-        return this.verbConfigs;
+        return this.verb;
+    }
+}
+
+class VerbObjectList {
+    private readonly verbObjs: VerbObject[];
+
+    public constructor() {
+        this.verbObjs = [];
+    }
+
+    public getVerbs(): Verb[] {
+        return this.verbObjs.map(v => v.getVerb());
+    }
+
+    public addVerb(verb: Verb) {
+        this.verbObjs.push(new VerbObject(verb));
     }
 }
 
 
-
 function generateVerbTable(infinitiveForm: string, verbType: VerbType): Verb[] {
-    const list = [] as Verb[];
+    const list = new VerbObjectList();
     const root = infinitiveForm.slice(0, -1); // remove last letter -н
 
     switch (verbType) {
@@ -59,18 +74,17 @@ function generateVerbTable(infinitiveForm: string, verbType: VerbType): Verb[] {
             break;
     }
 
-    return list;
+    return list.getVerbs();
 }
 
 function getMonovalentIntransitiveVerbConjucation(root: string): Verb[] {
-    const list = [] as Verb[];
+    const list = new VerbObjectList();
     // сэплъэ
-    let v = new VerbObject({
+    list.addVerb({
         root:`сэ${root}`,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
     });
-    list.push(v.getVerb());
 
-    return list;
+    return list.getVerbs();
 }
