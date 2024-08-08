@@ -25,6 +25,7 @@ export enum Person {
     Plural1stPerson = "Plural1stPerson",
     Plural2stPerson = "Plural2stPerson",
     Plural3rdPerson = "Plural3rdPerson",
+    Reflexive = "Reflexive",
     None = "None",
 }
 
@@ -35,9 +36,14 @@ export type Verb = {
     absolutiveMarker: Person;
     ergativeMarker?: Person;
     obliqueMarker?: Person;
+    benefactivePerson?: Person;
+    malefactivePerson?: Person;
+    comitativePerson?: Person;
+    causativePerson?: Person;
     tense: Tense;
     negative?: boolean;
 }
+
 
 export class VerbObject {
     private readonly verb: Verb;
@@ -47,6 +53,10 @@ export class VerbObject {
             ergativeMarker: Person.None,
             obliqueMarker: Person.None,
             negative: false,
+            benefactivePerson: Person.None,
+            malefactivePerson: Person.None,
+            comitativePerson: Person.None,
+            causativePerson: Person.None,
             ...verb,
         }
     }
