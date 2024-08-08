@@ -194,10 +194,10 @@ function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[]
 
     // -- I am --
 
-    // I am looking for myself - сызфэк1ожьы
+    // I am looking for me
     list.addVerb({
-        word:`сызфэ${root}жьы`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for myself`,
+        word:`-`,
+        meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
@@ -272,6 +272,23 @@ function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[]
         absolutiveMarker: Person.Singular1stPerson,
         benefactivePerson: Person.Plural3rdPerson,
     });
+    // I am looking for myself - сызфэк1ожьы
+    list.addVerb({
+        word:`скъызфэ${root}жьы`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} for myself`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular1stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+    list.addVerb({
+        word:`сызфэ${root}жьы`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} for myself`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular1stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
 
     // -- You are --
 
@@ -284,10 +301,10 @@ function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[]
         absolutiveMarker: Person.Singular2stPerson,
         benefactivePerson: Person.Singular1stPerson,
     });
-    // You are looking for yourself - укъызфэк1ожьы
+    // You are looking for you
     list.addVerb({
-        word:`узфэ${root}жьы`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for yourself`,
+        word:`-`,
+        meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
@@ -345,6 +362,25 @@ function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[]
         absolutiveMarker: Person.Singular2stPerson,
         benefactivePerson: Person.Plural3rdPerson,
     });
+    // You are looking for yourself - укъызфэк1ожьы
+    list.addVerb({
+        word:`узфэ${root}жьы`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} for yourself`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular2stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+    // You are looking for yourself - укъызфэк1ожьы
+    list.addVerb({
+        word:`укъызфэ${root}жьы`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} for yourself`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular2stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+
     // -- He/She/It is --
     // He/She/It is looking for me - къысфэк1о
     list.addVerb({
@@ -454,6 +490,14 @@ function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[]
         benefactivePerson: Person.Singular2stPerson,
     });
     list.addVerb({
+        word:`тыпфэ${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for you`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Singular2stPerson,
+    });
+    list.addVerb({
         word:`ткъыыпфэ${root}`,
         meaningInEnglish: `We are ${(wordInEn.ing)} for you`,
         tense: Tense.Present,
@@ -478,8 +522,243 @@ function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[]
         absolutiveMarker: Person.Plural1stPerson,
         benefactivePerson: Person.Singular3rdPerson,
     });
+    // We are looking for us - ткъытфэк1о
+    list.addVerb({
+        word:`-`,
+        meaningInEnglish: `-`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Plural1stPerson,
+    });
+    // We are looking for you all - ткъышъуфэк1о
+    list.addVerb({
+        word:`тышъуфэ${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for you all`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Plural2stPerson,
+    });
+    list.addVerb({
+        word:`ткъышъуфэ${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for you all`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Plural2stPerson,
+    });
+    // We are looking for them - тафэк1о
+    list.addVerb({
+        word:`тафэ${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Plural3rdPerson,
+    });
+    list.addVerb({
+        word:`тыкъафэ${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Plural3rdPerson,
+    });
+    // We are looking for ourselves - ткъызфэк1ожьы
+    list.addVerb({
+        word:`тызфэ${root}жьы`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for ourselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+    list.addVerb({
+        word:`ткъызфэ${root}жьы`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} for ourselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural1stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
 
     // -- You all are --
+    // You all are looking for me - шъусфэк1о
+    list.addVerb({
+        word:`шъукъысфэ${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for me`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Singular1stPerson,
+    });
+    // You all are looking for you - шъупфэк1о
+    list.addVerb({
+        word:`-`,
+        meaningInEnglish: `-`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Singular2stPerson,
+    });
+    // You all are looking for him/her/it - шъуфэк1о
+    list.addVerb({
+        word:`шъуфэ${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for him/her/it`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Singular3rdPerson,
+    });
+    list.addVerb({
+        word:`шъукъыфэ${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for him/her/it`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Singular3rdPerson,
+    });
+    // You all are looking for us - шъутфэк1о
+    list.addVerb({
+        word:`шъукъытфэ${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for us`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Plural1stPerson,
+    });
+    // You all are looking for you all
+    list.addVerb({
+        word:`-`,
+        meaningInEnglish: `-`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Plural2stPerson,
+    });
+    // You all are looking for them - шъуафэк1о
+    list.addVerb({
+        word:`шъуафэ${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Plural3rdPerson,
+    });
+    list.addVerb({
+        word:`шъукъафэ${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Plural3rdPerson,
+    });
+    // You all are looking for yourselves - шъузфэк1ожьы
+    list.addVerb({
+        word:`шъузфэ${root}жьы`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for yourselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+    list.addVerb({
+        word:`шъукъызфэ${root}жьы`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} for yourselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural2stPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+    // -- They are --
+    // They are looking for me - къысфэк1ох
+    list.addVerb({
+        word:`къысфэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for me`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Singular1stPerson,
+    });
+    // They are looking for you - къыпфэк1ох
+    list.addVerb({
+        word:`къыпфэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for you`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Singular2stPerson,
+    });
+    // They are looking for him/her/it - фэк1ох
+    list.addVerb({
+        word:`фэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for him/her/it`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Singular3rdPerson,
+    });
+    list.addVerb({
+        word:`къыфэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for him/her/it`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Singular3rdPerson,
+    });
+    // They are looking for us - къытфэк1ох
+    list.addVerb({
+        word:`къытфэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for us`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Plural1stPerson,
+    });
+    // They are looking for you all - къышъуфэк1ох
+    list.addVerb({
+        word:`къышъуфэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for you all`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Plural2stPerson,
+    });
+    // They are looking for them - афэк1ох
+    list.addVerb({
+        word:`афэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Plural3rdPerson,
+    });
+    list.addVerb({
+        word:`къафэ${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Plural3rdPerson,
+    });
+    // They are looking for themselves - къызфэк1ожьы
+    list.addVerb({
+        word:`зфэ${root}хжьы`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for themselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Reflexive,
+    });
+    list.addVerb({
+        word:`къызфэ${root}хжьы`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} for themselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: Person.Reflexive,
+    });
 
     return list.getVerbs();
 }
