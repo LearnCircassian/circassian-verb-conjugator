@@ -9,6 +9,8 @@ export function getMonovalentIntransitiveVerbs(root: string, wordInEn: BaseFormI
     const futureForms = _getFutureTense(root, wordInEn);
     list.addVerbs(futureForms); // add future tense forms
 
+    const benefactiveForms = _getBenefactiveForms(root, wordInEn)
+
     return list.getVerbs();
 }
 
@@ -192,572 +194,728 @@ function _getFutureTense(root: string, wordInEn: BaseFormInEnglish): Verb[] {
 function _getBenefactiveForms(root: string, wordInEn: BaseFormInEnglish): Verb[] {
     const list = new VerbObjectList();
 
+}
+
+function _getBenefactiveOrMalefactiveOrComitativeForms(root: string,
+                                                       wordInEn: BaseFormInEnglish,
+                                                       type: "Benefactive" | "Malefactive" | "Comitative"): Verb[] {
+
+    const isBenefactive = type === "Benefactive";
+    const isMalefactive = type === "Malefactive";
+    const isComitative = type === "Comitative";
+    let prefix = "";
+    let meaning = "";
+
+    switch (type) {
+        case "Benefactive":
+            prefix = "${prefix}";
+            meaning = "${meaning}";
+            break;
+        case "Comitative":
+            prefix = "дэ";
+            meaning = "with";
+            break;
+        case "Malefactive":
+            prefix = "ш1о";
+            meaning = "not in favor of";
+            break;
+    }
+    const list = new VerbObjectList();
+
     // -- I am --
 
-    // I am looking for me
+    // I am looking ${meaning} me
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
-    // I am looking for you - скъыпфэк1о
+    // I am looking ${meaning} you - скъып${prefix}к1о
     list.addVerb({
-        word:`сыпфэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for you`,
+        word:`сып${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
     list.addVerb({
-        word:`сыкъыпфэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for you`,
+        word:`сыкъып${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
-    // I am looking for him/her/it - сыфэк1о
+    // I am looking ${meaning} him/her/it - сы${prefix}к1о
     list.addVerb({
-        word:`сыфэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for him/her/it`,
+        word:`сы${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
     list.addVerb({
-        word:`скъыфэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for him/her/it`,
+        word:`скъы${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
-    // I am looking for us - скъытфэк1о
+    // I am looking ${meaning} us - скъыт${prefix}к1о
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Plural1stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural1stPerson : undefined,
     });
-    // I am looking for you all - скъышъуфэк1о
+    // I am looking ${meaning} you all - скъышъу${prefix}к1о
     list.addVerb({
-        word:`сышъуфэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for you all`,
+        word:`сышъу${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} you all`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Plural2stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
     });
     list.addVerb({
-        word:`сыкъышъуфэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for you all`,
+        word:`сыкъышъу${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} you all`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Plural2stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
     });
-    // I am looking for them - сафэк1о
+    // I am looking ${meaning} them - са${prefix}к1о
     list.addVerb({
-        word:`сафэ${root}`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for them`,
+        word:`са${prefix}${root}`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
-    // I am looking for myself - сызфэк1ожьы
+    // I am looking ${meaning} myself - сыз${prefix}к1ожьы
     list.addVerb({
-        word:`скъызфэ${root}жьы`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for myself`,
+        word:`скъыз${prefix}${root}жьы`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} myself`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
     list.addVerb({
-        word:`сызфэ${root}жьы`,
-        meaningInEnglish: `I am ${(wordInEn.ing)} for myself`,
+        word:`сыз${prefix}${root}жьы`,
+        meaningInEnglish: `I am ${(wordInEn.ing)} ${meaning} myself`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular1stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
 
     // -- You are --
 
-    // You are looking for me - укъысфэк1о
+    // You are looking ${meaning} me - укъыс${prefix}к1о
     list.addVerb({
-        word:`укъысфэ${root}`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for me`,
+        word:`укъыс${prefix}${root}`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} me`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Singular1stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular1stPerson : undefined,
     });
-    // You are looking for you
+    // You are looking ${meaning} you
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
-    // You are looking for him/her/it - уфэк1о
+    // You are looking ${meaning} him/her/it - у${prefix}к1о
     list.addVerb({
-        word:`уфэ${root}`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for him/her/it`,
+        word:`у${prefix}${root}`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
     list.addVerb({
-        word:`укъыфэ${root}`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for him/her/it`,
+        word:`укъы${prefix}${root}`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
-    // You are looking for us - укъытфэк1о
+    // You are looking ${meaning} us - укъыт${prefix}к1о
     list.addVerb({
-        word:`укъытфэ${root}`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for us`,
+        word:`укъыт${prefix}${root}`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} us`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Plural1stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural1stPerson : undefined,
     });
-    // You are looking for you all - укъышъуфэк1о
+    // You are looking ${meaning} you all - укъышъу${prefix}к1о
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Plural2stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
     });
-    // You are looking for them - уафэк1о
+    // You are looking ${meaning} them - уа${prefix}к1о
     list.addVerb({
-        word:`уафэ${root}`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for them`,
+        word:`уа${prefix}${root}`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
     list.addVerb({
-        word:`укъафэ${root}`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for them`,
+        word:`укъа${prefix}${root}`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
-    // You are looking for yourself - укъызфэк1ожьы
+    // You are looking ${meaning} yourself - укъыз${prefix}к1ожьы
     list.addVerb({
-        word:`узфэ${root}жьы`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for yourself`,
+        word:`уз${prefix}${root}жьы`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} yourself`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
-    // You are looking for yourself - укъызфэк1ожьы
+    // You are looking ${meaning} yourself - укъыз${prefix}к1ожьы
     list.addVerb({
-        word:`укъызфэ${root}жьы`,
-        meaningInEnglish: `You are ${(wordInEn.ing)} for yourself`,
+        word:`укъыз${prefix}${root}жьы`,
+        meaningInEnglish: `You are ${(wordInEn.ing)} ${meaning} yourself`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular2stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
 
     // -- He/She/It is --
-    // He/She/It is looking for me - къысфэк1о
+    // He/She/It is looking ${meaning} me - къыс${prefix}к1о
     list.addVerb({
-        word:`къысфэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for me`,
+        word:`къыс${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} me`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Singular1stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular1stPerson : undefined,
     });
-    // He/She/It is looking for you - къыпфэк1о
+    // He/She/It is looking ${meaning} you - къып${prefix}к1о
     list.addVerb({
-        word:`къыпфэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for you`,
+        word:`къып${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
-    // He/She/It is looking for him/her/it - фэк1о
+    // He/She/It is looking ${meaning} him/her/it - ${prefix}к1о
     list.addVerb({
-        word:`фэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for him/her/it`,
+        word:`${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Singular3rdPerson,
-    });
-    list.addVerb({
-        word:`къыфэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for him/her/it`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Singular3rdPerson,
-    });
-    // He/She/It is looking for us - къытфэк1о
-    list.addVerb({
-        word:`къытфэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for us`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Plural1stPerson,
-    });
-    // He/She/It is looking for you all - къышъуфэк1о
-    list.addVerb({
-        word:`къышъуфэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for you all`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Plural2stPerson,
-    });
-    // He/She/It is looking for them - афэк1о
-    list.addVerb({
-        word:`афэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for them`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
     list.addVerb({
-        word:`къафэ${root}`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for them`,
+        word:`къы${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
-    // He/She/It is looking for himself/herself/itself - къызфэк1ожьы
+    // He/She/It is looking ${meaning} us - къыт${prefix}к1о
     list.addVerb({
-        word:`зфэ${root}жьы`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for himself/herself/itself`,
+        word:`къыт${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} us`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Plural1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural1stPerson : undefined,
+    });
+    // He/She/It is looking ${meaning} you all - къышъу${prefix}к1о
+    list.addVerb({
+        word:`къышъу${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} you all`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
+    });
+    // He/She/It is looking ${meaning} them - а${prefix}к1о
+    list.addVerb({
+        word:`а${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
     list.addVerb({
-        word:`къызфэ${root}жьы`,
-        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} for himself/herself/itself`,
+        word:`къа${prefix}${root}`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Singular3rdPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
+    });
+    // He/She/It is looking ${meaning} himself/herself/itself - къыз${prefix}к1ожьы
+    list.addVerb({
+        word:`з${prefix}${root}жьы`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} himself/herself/itself`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
+    });
+    list.addVerb({
+        word:`къыз${prefix}${root}жьы`,
+        meaningInEnglish: `He/She/It is ${(wordInEn.ing)} ${meaning} himself/herself/itself`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
 
     // -- We are --
-    // We are looking for me - тысфэк1о
+    // We are looking ${meaning} me - тыс${prefix}к1о
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Singular1stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular1stPerson : undefined,
     });
-    // We are looking for you - тыпфэк1о
+    // We are looking ${meaning} you - тып${prefix}к1о
     list.addVerb({
-        word:`тыпфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for you`,
+        word:`тып${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
     list.addVerb({
-        word:`тыпфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for you`,
+        word:`тып${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
     list.addVerb({
-        word:`ткъыыпфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for you`,
+        word:`ткъыып${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
-    // We are looking for him/her/it - тфэк1о
+    // We are looking ${meaning} him/her/it - т${prefix}к1о
     list.addVerb({
-        word:`тфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for him/her/it`,
+        word:`т${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
     list.addVerb({
-        word:`ткъыфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for him/her/it`,
+        word:`ткъы${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
-    // We are looking for us - ткъытфэк1о
+    // We are looking ${meaning} us - ткъыт${prefix}к1о
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Plural1stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural1stPerson : undefined,
     });
-    // We are looking for you all - ткъышъуфэк1о
+    // We are looking ${meaning} you all - ткъышъу${prefix}к1о
     list.addVerb({
-        word:`тышъуфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for you all`,
+        word:`тышъу${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} you all`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Plural2stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
     });
     list.addVerb({
-        word:`ткъышъуфэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for you all`,
+        word:`ткъышъу${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} you all`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Plural2stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
     });
-    // We are looking for them - тафэк1о
+    // We are looking ${meaning} them - та${prefix}к1о
     list.addVerb({
-        word:`тафэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for them`,
+        word:`та${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
     list.addVerb({
-        word:`тыкъафэ${root}`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for them`,
+        word:`тыкъа${prefix}${root}`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
-    // We are looking for ourselves - ткъызфэк1ожьы
+    // We are looking ${meaning} ourselves - ткъыз${prefix}к1ожьы
     list.addVerb({
-        word:`тызфэ${root}жьы`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for ourselves`,
+        word:`тыз${prefix}${root}жьы`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} ourselves`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
     list.addVerb({
-        word:`ткъызфэ${root}жьы`,
-        meaningInEnglish: `We are ${(wordInEn.ing)} for ourselves`,
+        word:`ткъыз${prefix}${root}жьы`,
+        meaningInEnglish: `We are ${(wordInEn.ing)} ${meaning} ourselves`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural1stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
 
     // -- You all are --
-    // You all are looking for me - шъусфэк1о
+    // You all are looking ${meaning} me - шъус${prefix}к1о
     list.addVerb({
-        word:`шъукъысфэ${root}`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for me`,
+        word:`шъукъыс${prefix}${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} me`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Singular1stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular1stPerson : undefined,
     });
-    // You all are looking for you - шъупфэк1о
+    // You all are looking ${meaning} you - шъуп${prefix}к1о
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
-    // You all are looking for him/her/it - шъуфэк1о
+    // You all are looking ${meaning} him/her/it - шъу${prefix}к1о
     list.addVerb({
-        word:`шъуфэ${root}`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for him/her/it`,
+        word:`шъу${prefix}${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
     list.addVerb({
-        word:`шъукъыфэ${root}`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for him/her/it`,
+        word:`шъукъы${prefix}${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Singular3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
-    // You all are looking for us - шъутфэк1о
+    // You all are looking ${meaning} us - шъут${prefix}к1о
     list.addVerb({
-        word:`шъукъытфэ${root}`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for us`,
+        word:`шъукъыт${prefix}${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} us`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Plural1stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural1stPerson : undefined,
     });
-    // You all are looking for you all
+    // You all are looking ${meaning} you all
     list.addVerb({
         word:`-`,
         meaningInEnglish: `-`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Plural2stPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
     });
-    // You all are looking for them - шъуафэк1о
+    // You all are looking ${meaning} them - шъуа${prefix}к1о
     list.addVerb({
-        word:`шъуафэ${root}`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for them`,
+        word:`шъуа${prefix}${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
     list.addVerb({
-        word:`шъукъафэ${root}`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for them`,
+        word:`шъукъа${prefix}${root}`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
-    // You all are looking for yourselves - шъузфэк1ожьы
+    // You all are looking ${meaning} yourselves - шъуз${prefix}к1ожьы
     list.addVerb({
-        word:`шъузфэ${root}жьы`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for yourselves`,
+        word:`шъуз${prefix}${root}жьы`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} yourselves`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
     list.addVerb({
-        word:`шъукъызфэ${root}жьы`,
-        meaningInEnglish: `You all are ${(wordInEn.ing)} for yourselves`,
+        word:`шъукъыз${prefix}${root}жьы`,
+        meaningInEnglish: `You all are ${(wordInEn.ing)} ${meaning} yourselves`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural2stPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
     // -- They are --
-    // They are looking for me - къысфэк1ох
+    // They are looking ${meaning} me - къыс${prefix}к1ох
     list.addVerb({
-        word:`къысфэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for me`,
+        word:`къыс${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} me`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Singular1stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular1stPerson : undefined,
     });
-    // They are looking for you - къыпфэк1ох
+    // They are looking ${meaning} you - къып${prefix}к1ох
     list.addVerb({
-        word:`къыпфэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for you`,
+        word:`къып${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} you`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Singular2stPerson,
+        benefactivePerson: isBenefactive ? Person.Singular2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular2stPerson : undefined,
     });
-    // They are looking for him/her/it - фэк1ох
+    // They are looking ${meaning} him/her/it - ${prefix}к1ох
     list.addVerb({
-        word:`фэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for him/her/it`,
+        word:`${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Singular3rdPerson,
-    });
-    list.addVerb({
-        word:`къыфэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for him/her/it`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Singular3rdPerson,
-    });
-    // They are looking for us - къытфэк1ох
-    list.addVerb({
-        word:`къытфэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for us`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Plural1stPerson,
-    });
-    // They are looking for you all - къышъуфэк1ох
-    list.addVerb({
-        word:`къышъуфэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for you all`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Plural2stPerson,
-    });
-    // They are looking for them - афэк1ох
-    list.addVerb({
-        word:`афэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for them`,
-        tense: Tense.Present,
-        verbType: VerbType.MonovalentIntransitive,
-        absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
     list.addVerb({
-        word:`къафэ${root}х`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for them`,
+        word:`къы${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} him/her/it`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Singular3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Singular3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Singular3rdPerson : undefined,
     });
-    // They are looking for themselves - къызфэк1ожьы
+    // They are looking ${meaning} us - къыт${prefix}к1ох
     list.addVerb({
-        word:`зфэ${root}хжьы`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for themselves`,
+        word:`къыт${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} us`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Plural1stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural1stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural1stPerson : undefined,
+    });
+    // They are looking ${meaning} you all - къышъу${prefix}к1ох
+    list.addVerb({
+        word:`къышъу${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} you all`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural2stPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural2stPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural2stPerson : undefined,
+    });
+    // They are looking ${meaning} them - а${prefix}к1ох
+    list.addVerb({
+        word:`а${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} them`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
     });
     list.addVerb({
-        word:`къызфэ${root}хжьы`,
-        meaningInEnglish: `They are ${(wordInEn.ing)} for themselves`,
+        word:`къа${prefix}${root}х`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} them`,
         tense: Tense.Present,
         verbType: VerbType.MonovalentIntransitive,
         absolutiveMarker: Person.Plural3rdPerson,
-        benefactivePerson: Person.Reflexive,
+        benefactivePerson: isBenefactive ? Person.Plural3rdPerson : undefined,
+        malefactivePerson: isMalefactive ? Person.Plural3rdPerson : undefined,
+        comitativePerson: isComitative ? Person.Plural3rdPerson : undefined,
+    });
+    // They are looking ${meaning} themselves - къыз${prefix}к1ожьы
+    list.addVerb({
+        word:`з${prefix}${root}хжьы`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} themselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
+    });
+    list.addVerb({
+        word:`къыз${prefix}${root}хжьы`,
+        meaningInEnglish: `They are ${(wordInEn.ing)} ${meaning} themselves`,
+        tense: Tense.Present,
+        verbType: VerbType.MonovalentIntransitive,
+        absolutiveMarker: Person.Plural3rdPerson,
+        benefactivePerson: isBenefactive ? Person.Reflexive : undefined,
+        malefactivePerson: isMalefactive ? Person.Reflexive : undefined,
+        comitativePerson: isComitative ? Person.Reflexive : undefined,
     });
 
     return list.getVerbs();
